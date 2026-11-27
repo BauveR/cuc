@@ -35,3 +35,4 @@ Ver [`docs/`](./docs): un documento por sección principal.
 1. [Setup base](./docs/01-setup.md)
 3. [Testing](./docs/03-testing.md)
 4. [Design tokens y contenido](./docs/04-content-tokens.md)
+6. [Smooth scroll](./docs/06-smooth-scroll.md)

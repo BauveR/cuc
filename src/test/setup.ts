@@ -15,6 +15,10 @@ vi.mock('@react-three/fiber', async () => (await import('./mocks/r3f')).r3fMock)
 // Se silencia el aviso: el contraste se valida con tests de tokens.
 HTMLCanvasElement.prototype.getContext = vi.fn(() => null)
 
+// Instalados ya al cargar: librerías como ScrollTrigger los consultan al importarse.
+installMatchMedia()
+installObservers()
+
 beforeEach(() => {
   installMatchMedia()
   installObservers()
