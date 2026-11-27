@@ -24,10 +24,12 @@ npm run build
 - Todo el texto vive en `src/content/`.
 - Mobile-first, WCAG AA, respeta `prefers-reduced-motion`.
 - **Nunca** secretos en código, docs o tests. Las variables `VITE_*` son públicas.
-- Conventional Commits.
+- Conventional Commits. Ramas `feat/*` → `develop` → `release/*` → `main`.
+- Vulnerabilidades: ver [SECURITY.md](./SECURITY.md).
 
 ## Documentación
 
 Ver [`docs/`](./docs): un documento por sección principal.
 
+0. [Flujo de Git (ADR-001)](./docs/00-git-workflow.md)
 1. [Setup base](./docs/01-setup.md)

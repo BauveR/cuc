@@ -1,0 +1,7 @@
+# Reglas por defecto de gitleaks + allowlist mínima.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Hashes de integridad del lockfile (falsos positivos)"
+paths = ['''package-lock\.json''']

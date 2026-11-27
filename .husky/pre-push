@@ -1,0 +1,10 @@
+# Protección local: nunca push directo a ramas protegidas.
+branch="$(git rev-parse --abbrev-ref HEAD)"
+case "$branch" in
+  main|develop)
+    echo "⛔ Push directo a '$branch' bloqueado. Usa una rama + PR."
+    echo "   (Solo el bootstrap inicial usa: git push --no-verify)"
+    exit 1
+    ;;
+esac
+npm run check

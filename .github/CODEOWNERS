@@ -1,0 +1,6 @@
+# Revisión obligatoria en zonas sensibles (activar "Require review from Code Owners").
+*                       @BauveR
+/config/                @BauveR
+/.github/               @BauveR
+/package.json           @BauveR
+/package-lock.json      @BauveR
