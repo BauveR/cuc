@@ -41,6 +41,7 @@ Ver [`docs/`](./docs): un documento por sección principal.
 8. [Hero 3D: GLB y calidad adaptativa](./docs/08-hero3d-glb.md)
 9. [Secciones de la home](./docs/09-home-sections.md)
 11. [Rendimiento y SEO](./docs/11-perf-seo.md)
+12. [Pipeline de CI](./docs/12-ci.md)
 13. [Vídeo del hero con scroll](./docs/13-hero-video.md)
 
 Créditos de imágenes y fuentes: [docs/CREDITS.md](./docs/CREDITS.md).
