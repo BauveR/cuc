@@ -51,7 +51,7 @@ export function RevealText({ children, as: Tag = 'p', className, id }: RevealTex
   )
 
   return (
-    <Tag ref={ref} id={id} className={className}>
+    <Tag ref={ref} id={id} className={className} data-reveal="">
       {children}
     </Tag>
   )

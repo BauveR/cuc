@@ -9,7 +9,12 @@ export const cases: SiteContent['cases'] = {
   eyebrow: 'Casos',
   title: 'Así ayudamos a las pymes',
   intro: 'Ejemplos del tipo de proyectos que desarrollamos con empresas como la tuya.',
-  illustrativeLabel: 'Caso ilustrativo',
+  labels: {
+    illustrative: 'Caso ilustrativo',
+    challenge: 'Reto',
+    solution: 'Solución',
+    outcome: 'Resultado',
+  },
   items: [
     {
       id: 'retail-omnichannel',

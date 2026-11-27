@@ -23,7 +23,8 @@ export const PLACEHOLDER_RADIUS = 1
  */
 export const TIMELINE: Timeline = {
   desktop: [
-    { at: 0, position: [1.4, 0, 0], rotation: [0.3, 0, 0], scale: 1 },
+    // Inicio: modelo a la derecha, fuera de la columna del titular (contraste AA).
+    { at: 0, position: [2.4, 0, 0], rotation: [0.3, 0, 0], scale: 0.9 },
     { at: 0.35, position: [-1.5, -0.2, 0], rotation: [0.8, 2.2, 0.2], scale: 0.8 },
     { at: 0.7, position: [1.2, 0.3, 0], rotation: [1.1, 3.6, 0.1], scale: 0.9 },
     { at: 1, position: [0, 0, 0], rotation: [1.4, 5, 0], scale: 1.15 },

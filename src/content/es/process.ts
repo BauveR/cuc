@@ -18,8 +18,12 @@ export const workProcess: SiteContent['process'] = {
       description: 'Desplegamos por fases, minimizando el impacto en el día a día de tu equipo.',
     },
     {
+      title: 'Formación',
+      description: 'Tu equipo aprende a sacar partido a las nuevas herramientas desde el primer día.',
+    },
+    {
       title: 'Acompañamiento',
-      description: 'Formamos a tu equipo, medimos resultados y mantenemos la solución al día.',
+      description: 'Medimos resultados, damos soporte y mantenemos la solución al día.',
     },
   ],
 }
