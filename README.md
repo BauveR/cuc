@@ -35,7 +35,10 @@ Ver [`docs/`](./docs): un documento por sección principal.
 1. [Setup base](./docs/01-setup.md)
 3. [Testing](./docs/03-testing.md)
 4. [Design tokens y contenido](./docs/04-content-tokens.md)
+5. [Layout editorial: header, menú y footer](./docs/05-layout-editorial.md)
 6. [Smooth scroll](./docs/06-smooth-scroll.md)
 7. [Hero 3D](./docs/07-hero3d.md)
 8. [Hero 3D: GLB y calidad adaptativa](./docs/08-hero3d-glb.md)
 9. [Secciones de la home](./docs/09-home-sections.md)
+
+Créditos de imágenes y fuentes: [docs/CREDITS.md](./docs/CREDITS.md).

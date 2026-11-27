@@ -9,6 +9,9 @@
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
+    font-weight: 500;
+    /* Anclas: el header sticky no tapa el inicio de la sección (scroll nativo). */
+    scroll-padding-top: var(--spacing-header);
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

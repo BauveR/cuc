@@ -1,20 +1,24 @@
 import { Card } from '@/components/ui/Card'
 import { Heading } from '@/components/ui/Heading'
 import { Section } from '@/components/ui/Section'
+import { SplitBlock, type BlockImage } from '@/components/ui/SplitBlock'
 import { SECTION_IDS, type SiteContent } from '@/content/site'
 
 const TITLE_ID = 'services-title'
 
 interface ServicesSectionProps {
   readonly content: SiteContent['services']
+  readonly image: BlockImage
 }
 
-/** Grid de servicios: 1 columna en móvil, 2 en tablet, 3 en escritorio. */
-export function ServicesSection({ content }: ServicesSectionProps) {
+/** Titular + imagen (6 + 6) y grid de servicios: 1 → 2 → 3 columnas. */
+export function ServicesSection({ content, image }: ServicesSectionProps) {
   return (
     <Section id={SECTION_IDS.services} labelledBy={TITLE_ID}>
-      <Heading id={TITLE_ID} eyebrow={content.eyebrow} title={content.title} intro={content.intro} />
-      <ul className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+      <SplitBlock image={image}>
+        <Heading id={TITLE_ID} eyebrow={content.eyebrow} title={content.title} intro={content.intro} />
+      </SplitBlock>
+      <ul className="grid gap-x-gutter gap-y-stack md:grid-cols-2 lg:grid-cols-3">
         {content.items.map((service) => (
           <li key={service.id}>
             <Card title={service.title}>

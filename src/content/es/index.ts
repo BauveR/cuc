@@ -7,6 +7,8 @@ import { sectors } from './sectors.ts'
 import { cases } from './cases.ts'
 import { contact } from './contact.ts'
 import { cta } from './cta.ts'
+import { footer, layout } from './layout.ts'
+import { media } from './media.ts'
 
 // TODO(marca): sustituir "[NOMBRE]" por el nombre comercial definitivo.
 export const es: SiteContent = {
@@ -29,4 +31,7 @@ export const es: SiteContent = {
   cases,
   cta,
   contact,
+  layout,
+  footer,
+  media,
 }

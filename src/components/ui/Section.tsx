@@ -33,7 +33,7 @@ export function Section({ id, labelledBy, children, tone = 'paper', className }:
       aria-labelledby={labelledBy}
       className={cx('px-gutter py-section', TONES[tone], className)}
     >
-      <div className="mx-auto flex max-w-content flex-col gap-stack">{children}</div>
+      <div className="mx-auto flex w-full max-w-content flex-col gap-stack">{children}</div>
     </section>
   )
 }
