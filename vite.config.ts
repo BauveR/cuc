@@ -7,6 +7,17 @@ import { securityHeaders } from './config/security-headers.ts'
 import { htmlMeta } from './config/html-meta-plugin.ts'
 import { getContent } from './src/content/site.ts'
 
+/**
+ * three/R3F en un chunk propio y diferido. React va aparte de forma explícita:
+ * si no, Rolldown lo arrastraría a vendor-three (dependencia de R3F) y el
+ * chunk principal importaría three estáticamente, rompiendo el lazy-load.
+ */
+const vendorChunk = (id: string): string | undefined => {
+  if (/node_modules\/(react|react-dom|scheduler)\//.test(id)) return 'vendor-react'
+  if (/node_modules\/(three|@react-three|three-stdlib|maath)\//.test(id)) return 'vendor-three'
+  return undefined
+}
+
 export default defineConfig({
   plugins: [react(), tailwindcss(), htmlMeta(getContent().meta)],
   resolve: {
@@ -16,6 +27,11 @@ export default defineConfig({
   envPrefix: 'VITE_',
   build: {
     sourcemap: false, // no publicar el código fuente en producción
+    // three es lazy (~250 kB gzip) y nunca bloquea el primer render.
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: { manualChunks: vendorChunk },
+    },
   },
   server: {
     headers: securityHeaders({ dev: true }),
@@ -30,6 +46,7 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     css: true,
     restoreMocks: true,
+    clearMocks: true,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],

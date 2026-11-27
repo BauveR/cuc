@@ -1,4 +1,5 @@
 import { createElement, type ReactNode } from 'react'
+import { vi } from 'vitest'
 
 interface CanvasProps {
   readonly children?: ReactNode
@@ -26,4 +27,5 @@ export const r3fMock = {
   useFrame: () => undefined,
   useThree: () => ({ size: { width: 0, height: 0 }, viewport: { width: 0, height: 0 } }),
   extend: () => undefined,
+  invalidate: vi.fn(),
 }
