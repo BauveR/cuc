@@ -49,7 +49,7 @@ Conventional Commit (`feat/hero-section`, `test/configure-vitest`).
 | pre-commit | lint-staged + ESLint | Lint de archivos modificados, 0 warnings |
 | commit-msg | commitlint | Exige Conventional Commits |
 | pre-push | husky | Bloquea push directo a `main`/`develop`; ejecuta `npm run check` |
-| PR / push | GitHub Actions `ci.yml` | typecheck, lint, test, build, `npm audit`, gitleaks (historial completo) |
+| PR / push | GitHub Actions `ci.yml` | typecheck, lint, test, build, `npm audit`, gitleaks CLI (historial completo) |
 | push a `main` | `release.yml` (release-please) | PR de release con CHANGELOG + SemVer → tag |
 | Semanal | Dependabot → `develop` | Actualizaciones npm y Actions |
 
@@ -59,6 +59,12 @@ Conventional Commit (`feat/hero-section`, `test/configure-vitest`).
 - `permissions: contents: read` global; escritura solo en el job de release.
 - `persist-credentials: false` en checkout.
 - `npm ci --ignore-scripts`: lockfile estricto y sin scripts `postinstall` de terceros.
+- gitleaks se ejecuta como **binario oficial con sha256 verificado** (versión y
+  hash fijados en `ci.yml`), escaneando siempre el historial completo.
+  Se descartó `gitleaks-action`: escanea el rango `<primer>^..<último>` del push
+  y falla cuando el primer commit es la raíz del repo (primer push). Para
+  actualizar: cambiar `GITLEAKS_VERSION` y `GITLEAKS_SHA256` desde el
+  `checksums.txt` del release.
 
 ## Configuración en GitHub (tras el primer push)
 
