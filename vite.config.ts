@@ -1,11 +1,13 @@
 /// <reference types="vitest/config" />
 import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { securityHeaders } from './config/security-headers.ts'
 import { htmlMeta } from './config/html-meta-plugin.ts'
 import { selfHostedAssets } from './config/self-hosted-assets.ts'
+import { seoPlugin } from './config/seo-plugin.ts'
+import { resolveSiteUrl } from './config/site-url.ts'
 import { getContent } from './src/content/site.ts'
 
 /**
@@ -19,8 +21,19 @@ const vendorChunk = (id: string): string | undefined => {
   return undefined
 }
 
-export default defineConfig({
-  plugins: [react(), tailwindcss(), htmlMeta(getContent().meta), selfHostedAssets()],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    tailwindcss(),
+    htmlMeta(getContent().meta),
+    selfHostedAssets(),
+    seoPlugin({
+      content: getContent(),
+      // URL pública (no es secreto). Se define en el hosting o en .env.local.
+      site: resolveSiteUrl(loadEnv(mode, process.cwd(), 'VITE_')['VITE_SITE_URL']),
+      buildDate: new Date().toISOString().slice(0, 10),
+    }),
+  ],
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
@@ -56,4 +69,4 @@ export default defineConfig({
       thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },
     },
   },
-})
+}))

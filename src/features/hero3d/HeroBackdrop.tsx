@@ -1,5 +1,6 @@
 import { Suspense, lazy, useCallback, useState } from 'react'
 import { HeroVideo } from '@/features/heroVideo/HeroVideo'
+import { useFirstInteraction } from '@/hooks/useFirstInteraction'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { supportsWebGL } from '@/lib/webgl'
 import { HeroPoster } from './HeroPoster'
@@ -13,10 +14,14 @@ const HeroCanvas = lazy(() => import('./HeroCanvas'))
  * Fondo fijo del hero, detrás del contenido y a 100lvh.
  * Capas (de atrás adelante): póster → vídeo con scrub → canvas 3D.
  * Solo póster si: reduced-motion, sin WebGL, detectando GPU o GPU tier 0.
+ * El 3D se carga tras la PRIMERA INTERACCIÓN: lo mueve el scroll, así que
+ * antes no aporta nada (el póster muestra el estado inicial) y su coste
+ * (283 KB de three + shaders) queda fuera de la carga inicial (TBT/INP).
  */
 export function HeroBackdrop() {
   const reducedMotion = usePrefersReducedMotion()
-  const canTry3d = !reducedMotion && supportsWebGL()
+  const interacted = useFirstInteraction(!reducedMotion)
+  const canTry3d = interacted && !reducedMotion && supportsWebGL()
   const gpu = useGpuTier(canTry3d)
   const dpr = canTry3d && gpu ? dprForGpu(gpu) : null
   const [ready, setReady] = useState(false) // estado de UI, no de scroll
