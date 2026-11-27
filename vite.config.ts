@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { securityHeaders } from './config/security-headers.ts'
 import { htmlMeta } from './config/html-meta-plugin.ts'
+import { selfHostedAssets } from './config/self-hosted-assets.ts'
 import { getContent } from './src/content/site.ts'
 
 /**
@@ -19,7 +20,7 @@ const vendorChunk = (id: string): string | undefined => {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), htmlMeta(getContent().meta)],
+  plugins: [react(), tailwindcss(), htmlMeta(getContent().meta), selfHostedAssets()],
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },

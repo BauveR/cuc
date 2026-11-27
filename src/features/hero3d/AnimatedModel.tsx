@@ -1,14 +1,9 @@
 import { useRef, type ReactNode } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { MathUtils, type Group } from 'three'
-import { DAMPING } from './timeline.config'
+import { DAMPING, FRAME } from './timeline.config'
 import { scrollState } from './scrollState'
 import type { ModelController } from './types'
-
-/** Por debajo de este error se considera que el modelo ha llegado a su pose. */
-const EPSILON = 1e-4
-/** Evita saltos tras pestañas inactivas o frames muy largos. */
-const MAX_DELTA = 1 / 15
 
 interface AnimatedModelProps {
   readonly controller: ModelController
@@ -26,7 +21,7 @@ export function AnimatedModel({ controller, children }: AnimatedModelProps) {
   useFrame((state, rawDelta) => {
     const g = group.current
     if (!g) return
-    const delta = Math.min(rawDelta, MAX_DELTA)
+    const delta = Math.min(rawDelta, FRAME.maxDelta)
     const target = controller.poseAt(scrollState.progress)
     let error = 0
 
@@ -48,7 +43,7 @@ export function AnimatedModel({ controller, children }: AnimatedModelProps) {
     )
     g.scale.setScalar(damp(g.scale.x, target.scale))
 
-    if (error > EPSILON) state.invalidate()
+    if (error > FRAME.epsilon) state.invalidate()
   })
 
   return <group ref={group}>{children}</group>
