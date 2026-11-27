@@ -61,6 +61,14 @@ replicarse en el hosting (Netlify `_headers`, Vercel `vercel.json`, Nginx…)
 cuando se elija proveedor. La CSP de dev relaja `script-src`/`connect-src`
 solo para React Refresh y HMR.
 
+## Versión de Node
+
+`.nvmrc` fija una versión **exacta** (22.23.5): la CI (`node-version-file`) y
+el entorno local usan la misma. `engines` marca el mínimo (`>=22.22.2`, exigido
+por jsdom ≥ 30 y lint-staged ≥ 17) y `engine-strict` impide instalar con una
+versión inferior. Actualizar Node 22 a menudo: sus releases incluyen parches
+de seguridad.
+
 ## Comandos
 
 ```bash
