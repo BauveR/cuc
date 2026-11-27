@@ -8,9 +8,11 @@ describe('securityHeaders', () => {
   const prod = securityHeaders({ dev: false })
   const csp = prod['Content-Security-Policy'] ?? ''
 
-  it('la CSP de producción no permite scripts inline ni eval', () => {
+  it('la CSP de producción no permite scripts inline ni eval de JS', () => {
     const scripts = directive(csp, 'script-src')
-    expect(scripts).toBe("script-src 'self'")
+    // Solo WebAssembly (decoders 3D); nunca 'unsafe-eval' ni 'unsafe-inline'.
+    expect(scripts).toBe("script-src 'self' 'wasm-unsafe-eval'")
+    expect(scripts).not.toMatch(/'unsafe-(eval|inline)'/)
   })
 
   it('bloquea framing, plugins y base-uri externos', () => {

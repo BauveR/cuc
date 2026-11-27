@@ -6,6 +6,14 @@ export const MOBILE_BREAKPOINT = 768
 /** Suavizado (λ de MathUtils.damp): mayor = sigue al scroll más rápido. */
 export const DAMPING = 4
 
+/** Control de frames compartido por todos los modelos animados. */
+export const FRAME = {
+  /** Por debajo de este error se considera alcanzado el objetivo (deja de pedir frames). */
+  epsilon: 1e-4,
+  /** Delta máximo: evita saltos tras pestañas inactivas o frames muy largos. */
+  maxDelta: 1 / 15,
+} as const
+
 /** Radio base de la geometría placeholder (icosaedro). */
 export const PLACEHOLDER_RADIUS = 1
 

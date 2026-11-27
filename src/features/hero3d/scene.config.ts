@@ -4,7 +4,6 @@
  */
 export const SCENE = {
   camera: { fov: 35, near: 0.1, far: 100 },
-  dpr: [1, 2] as [number, number],
   lights: {
     ambient: 0.7,
     key: { intensity: 1.6, position: [3, 4, 5] as [number, number, number] },

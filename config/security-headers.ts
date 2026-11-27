@@ -11,7 +11,8 @@ const csp = (dev: boolean): string =>
   [
     "default-src 'self'",
     // En dev, React Refresh inyecta un preámbulo inline y HMR usa websockets.
-    dev ? "script-src 'self' 'unsafe-inline'" : "script-src 'self'",
+    // 'wasm-unsafe-eval': solo compilar WebAssembly (decoders Draco/Basis), NO habilita eval().
+    dev ? "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'" : "script-src 'self' 'wasm-unsafe-eval'",
     "style-src 'self' 'unsafe-inline'", // estilos inline de GSAP/R3F
     "img-src 'self' data: blob:",
     "font-src 'self'",

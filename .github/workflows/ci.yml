@@ -37,6 +37,8 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npm run build
+      - name: Presupuesto del modelo 3D (si existe)
+        run: npm run models:check
 
       - name: Audit dependencias de runtime
         run: npm audit --omit=dev --audit-level=moderate

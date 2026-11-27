@@ -4,6 +4,8 @@ import { vi } from 'vitest'
 interface CanvasProps {
   readonly children?: ReactNode
   readonly className?: string
+  readonly frameloop?: string
+  readonly dpr?: unknown
 }
 
 /**
@@ -11,10 +13,12 @@ interface CanvasProps {
  * Los hijos (mallas, luces…) NO se renderizan: no son elementos DOM.
  * La escena 3D es decorativa, así que se marca aria-hidden.
  */
-export const MockCanvas = ({ className }: CanvasProps) =>
+export const MockCanvas = ({ className, frameloop, dpr }: CanvasProps) =>
   createElement('div', {
     'data-testid': 'r3f-canvas',
     'aria-hidden': true,
+    'data-frameloop': frameloop,
+    'data-dpr': JSON.stringify(dpr),
     className,
   })
 
