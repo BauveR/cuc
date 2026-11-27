@@ -50,8 +50,12 @@ describe('content', () => {
       for (const id of anchors) expect(known.has(id), id).toBe(true)
     })
 
-    it('los ids de sectores y casos son únicos', () => {
-      for (const list of [content.sectors.items, content.cases.items]) {
+    it('el proceso tiene 5 pasos (01–05)', () => {
+      expect(content.process.steps).toHaveLength(5)
+    })
+
+    it('los ids de sectores, casos e integraciones son únicos', () => {
+      for (const list of [content.sectors.items, content.cases.items, content.integrations.items]) {
         const ids = list.map((item) => item.id)
         expect(new Set(ids).size).toBe(ids.length)
       }

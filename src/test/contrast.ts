@@ -27,3 +27,10 @@ export const parseColorTokens = (css: string): Record<string, string> =>
   Object.fromEntries(
     [...css.matchAll(/--color-([a-z-]+):\s*(#[0-9a-f]{6})\s*;/gi)].map((m) => [m[1], m[2]]),
   )
+
+/** Mezcla `top` con opacidad `alpha` sobre `bottom` (composición sRGB simple). */
+export const blend = (top: string, bottom: string, alpha: number): string => {
+  const [t, b] = [parseHex(top), parseHex(bottom)]
+  const mix = t.map((c, i) => Math.round(c * alpha + (b[i] ?? 0) * (1 - alpha)))
+  return `#${mix.map((c) => c.toString(16).padStart(2, '0')).join('')}`
+}

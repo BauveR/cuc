@@ -37,3 +37,4 @@ Ver [`docs/`](./docs): un documento por sección principal.
 4. [Design tokens y contenido](./docs/04-content-tokens.md)
 6. [Smooth scroll](./docs/06-smooth-scroll.md)
 7. [Hero 3D](./docs/07-hero3d.md)
+9. [Secciones de la home](./docs/09-home-sections.md)

@@ -4,7 +4,9 @@
  */
 export const SECTION_IDS = {
   main: 'contenido',
+  intro: 'inicio',
   services: 'servicios',
+  integrations: 'integraciones',
   process: 'proceso',
   sectors: 'sectores',
   cases: 'casos',

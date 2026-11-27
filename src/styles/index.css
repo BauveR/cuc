@@ -24,6 +24,21 @@
     outline-offset: 3px;
   }
 
+  /* Sobre fondo oscuro el acento no llega a 3:1 (WCAG 2.4.11): foco claro. */
+  [data-tone='inverse'] :focus-visible {
+    outline-color: var(--color-on-inverse);
+  }
+
+  /*
+   * Máscaras de RevealText (SplitText, overflow: clip): con interlineados
+   * editoriales (< 1) recortarían los descendentes (g, j, p, y). Se amplía
+   * la caja de recorte hacia abajo sin alterar el ritmo vertical.
+   */
+  [data-reveal] > div {
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
