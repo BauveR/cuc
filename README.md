@@ -5,7 +5,7 @@ para pymes en Barcelona. Contenido en ES, preparado para CA/EN.
 
 ## Requisitos
 
-- Node 22 (`.nvmrc`)
+- Node 22.23.5 (`.nvmrc`, mínimo `>=22.22.2`): `nvm install && nvm use`
 
 ## Uso
 
