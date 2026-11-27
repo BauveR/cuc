@@ -1,17 +1,20 @@
-import { getContent } from '@/content/site'
+import { useRef } from 'react'
+import { SECTION_IDS, getContent } from '@/content/site'
 import { HeroBackdrop } from '@/features/hero3d/HeroBackdrop'
+import { useSectionTriggers } from '@/features/scroll/useSectionTriggers'
+import { Home } from '@/pages/Home'
 
 const content = getContent()
 
 export function App() {
-  const { brand } = content
+  const mainRef = useRef<HTMLElement>(null)
+  useSectionTriggers(mainRef) // data-active en cada [data-section]
 
   return (
     <>
       <HeroBackdrop />
-      <main className="min-h-dvh grid place-content-center gap-4 px-gutter text-center">
-        <h1 className="text-display font-semibold">{brand.name}</h1>
-        <p className="text-lead text-ink-muted">{brand.tagline}</p>
+      <main id={SECTION_IDS.main} ref={mainRef} tabIndex={-1} className="outline-none">
+        <Home content={content} />
       </main>
     </>
   )

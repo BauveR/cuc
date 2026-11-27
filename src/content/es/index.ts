@@ -1,10 +1,12 @@
 import type { SiteContent } from '../types.ts'
 import { hero } from './hero.ts'
 import { services } from './services.ts'
+import { integrations } from './integrations.ts'
 import { workProcess } from './process.ts'
 import { sectors } from './sectors.ts'
 import { cases } from './cases.ts'
 import { contact } from './contact.ts'
+import { cta } from './cta.ts'
 
 // TODO(marca): sustituir "[NOMBRE]" por el nombre comercial definitivo.
 export const es: SiteContent = {
@@ -21,8 +23,10 @@ export const es: SiteContent = {
   },
   hero,
   services,
+  integrations,
   process: workProcess,
   sectors,
   cases,
+  cta,
   contact,
 }

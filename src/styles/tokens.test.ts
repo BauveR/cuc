@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import css from './tokens.css?raw'
-import { contrastRatio, parseColorTokens } from '@/test/contrast'
+import { blend, contrastRatio, parseColorTokens } from '@/test/contrast'
 
 const tokens = parseColorTokens(css)
 const color = (name: string): string => {
@@ -29,6 +29,18 @@ describe('design tokens', () => {
 
   it.each(PAIRS)('%s sobre %s cumple %s:1 (WCAG AA)', (fg, bg, min) => {
     expect(contrastRatio(color(fg), color(bg))).toBeGreaterThanOrEqual(min)
+  })
+
+  it('velo móvil del intro (paper 85 % sobre el modelo oscuro) mantiene AA', () => {
+    // Peor caso: el velo sobre el color más oscuro posible del modelo (ink).
+    const veil = blend(color('paper'), color('ink'), 0.85)
+    expect(contrastRatio(color('ink-muted'), veil)).toBeGreaterThanOrEqual(4.5)
+    expect(contrastRatio(color('ink'), veil)).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it('el foco sobre fondo inverso usa on-inverse (≥ 3:1, WCAG 2.4.11)', () => {
+    expect(contrastRatio(color('accent'), color('inverse'))).toBeLessThan(3)
+    expect(contrastRatio(color('on-inverse'), color('inverse'))).toBeGreaterThanOrEqual(3)
   })
 
   it('define la escala tipográfica y los espaciados de layout', () => {
