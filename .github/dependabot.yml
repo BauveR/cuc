@@ -11,6 +11,16 @@ updates:
       prefix: chore
       prefix-development: chore
       include: scope
+    # Majors que requieren migración planificada (ver docs/00-git-workflow.md).
+    ignore:
+      # eslint-plugin-jsx-a11y aún no soporta ESLint 10.
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      - dependency-name: '@eslint/js'
+        update-types: [version-update:semver-major]
+      # TypeScript 7 (compilador nativo): migración propia.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
     groups:
       dev-tooling:
         dependency-type: development
