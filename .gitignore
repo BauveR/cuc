@@ -1,0 +1,24 @@
+# deps / build
+node_modules
+dist
+dist-ssr
+coverage
+*.tsbuildinfo
+
+# entorno: NUNCA versionar ficheros .env reales
+.env
+.env.*
+!.env.example
+
+# secretos y credenciales
+*.pem
+*.key
+*.p12
+*.crt
+
+# editor / SO
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.log
