@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { axe, renderWithProviders, screen } from '@/test/renderWithProviders'
-import { getContent } from '@/content'
+import { getContent } from '@/content/site'
 import { App } from './App'
 
 const { brand } = getContent()

@@ -1,4 +1,4 @@
-import { getContent } from '@/content'
+import { getContent } from '@/content/site'
 
 const content = getContent()
 
@@ -8,7 +8,7 @@ export function App() {
   return (
     <main className="min-h-dvh grid place-content-center gap-4 px-6 text-center">
       <h1 className="text-4xl font-semibold tracking-tight">{brand.name}</h1>
-      <p className="text-lg text-fg-muted">{brand.tagline}</p>
+      <p className="text-lg text-ink-muted">{brand.tagline}</p>
     </main>
   )
 }

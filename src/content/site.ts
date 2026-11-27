@@ -7,3 +7,4 @@ export const getContent = (locale: Locale = DEFAULT_LOCALE): SiteContent =>
   dictionaries[locale]
 
 export * from './types.ts'
+export * from './sections.ts'

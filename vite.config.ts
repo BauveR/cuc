@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { securityHeaders } from './config/security-headers.ts'
 import { htmlMeta } from './config/html-meta-plugin.ts'
-import { getContent } from './src/content/index.ts'
+import { getContent } from './src/content/site.ts'
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), htmlMeta(getContent().meta)],

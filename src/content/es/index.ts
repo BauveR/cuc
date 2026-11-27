@@ -1,4 +1,10 @@
 import type { SiteContent } from '../types.ts'
+import { hero } from './hero.ts'
+import { services } from './services.ts'
+import { workProcess } from './process.ts'
+import { sectors } from './sectors.ts'
+import { cases } from './cases.ts'
+import { contact } from './contact.ts'
 
 // TODO(marca): sustituir "[NOMBRE]" por el nombre comercial definitivo.
 export const es: SiteContent = {
@@ -6,11 +12,17 @@ export const es: SiteContent = {
     lang: 'es',
     title: '[NOMBRE] · Tecnología para pymes en Barcelona',
     description:
-      'Servicios tecnológicos e integración de soluciones para pymes en Barcelona.',
+      'Soporte IT, ciberseguridad, cloud, desarrollo web e integración de software para pymes en Barcelona.',
   },
   brand: {
     name: '[NOMBRE]',
     tagline: 'Tecnología que trabaja para tu pyme',
     location: 'Barcelona',
   },
+  hero,
+  services,
+  process: workProcess,
+  sectors,
+  cases,
+  contact,
 }
