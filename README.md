@@ -33,3 +33,4 @@ Ver [`docs/`](./docs): un documento por sección principal.
 
 0. [Flujo de Git (ADR-001)](./docs/00-git-workflow.md)
 1. [Setup base](./docs/01-setup.md)
+3. [Testing](./docs/03-testing.md)

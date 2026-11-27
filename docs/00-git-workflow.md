@@ -20,11 +20,12 @@ trazable y auditable, con barreras automáticas contra secretos y regresiones.
 | ---- | ------- | -------- | ----- | --- |
 | `main` | — | — | — | Producción. Cada release lleva tag `vX.Y.Z` |
 | `develop` | `main` | — | — | Integración / preview. Rama por defecto en GitHub |
-| `feat/*` `fix/*` `chore/*` `docs/*` `sec/*` | `develop` | `develop` | Squash | Una por paso o sección |
+| `<tipo>/*` (`feat` `fix` `test` `chore` `docs` `sec`…) | `develop` | `develop` | Squash | Una por paso o sección |
 | `release/x.y.z` | `develop` | `main` (+ back-merge a `develop`) | Merge commit | Congelar versión, ajustes finales |
 | `hotfix/*` | `main` | `main` + `develop` | Merge commit | Urgencias en producción (prioridad: seguridad) |
 
-**Nombres de rama**: `tipo/descripcion-en-kebab` (`feat/hero-section`).
+**Nombres de rama**: `tipo/descripcion-en-kebab`, donde `tipo` es un tipo de
+Conventional Commit (`feat/hero-section`, `test/configure-vitest`).
 **Commits**: Conventional Commits, con el tipo extra `sec` para cambios de seguridad.
 
 ## Alternativas descartadas
