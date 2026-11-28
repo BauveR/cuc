@@ -15,6 +15,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["vite.config.ts", "config", "scripts", "src/content", "src/features/hero3d/assets.ts"],
+  "include": ["vite.config.ts", "config", "scripts", "src/content", "src/features/hero3d/assets.ts", "src/features/hero3d/scene.config.ts"],
   "exclude": ["**/*.test.ts"]
 }

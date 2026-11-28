@@ -12,10 +12,20 @@ export const SCENE = {
   material: { color: '#141414', roughness: 0.45, metalness: 0.1 },
 } as const
 
-/** Póster estático: LCP y fallback (reduced-motion, sin WebGL). */
+/** Póster estático: LCP y fallback (reduced-motion, sin WebGL, antes del 1er scroll). */
 export const POSTER = {
-  avif: '/hero/poster.avif',
-  webp: '/hero/poster.webp',
+  widths: [640, 1280, 1920],
+  /** El póster ocupa todo el viewport. */
+  sizes: '100vw',
   width: 1920,
   height: 1200,
 } as const
+
+export type PosterFormat = 'avif' | 'webp'
+
+export const posterUrl = (width: number, format: PosterFormat): string =>
+  `/hero/poster-${width}.${format}`
+
+/** srcset responsive: el navegador elige el ancho según viewport y DPR. */
+export const posterSrcSet = (format: PosterFormat): string =>
+  POSTER.widths.map((w) => `${posterUrl(w, format)} ${w}w`).join(', ')

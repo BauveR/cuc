@@ -1,4 +1,4 @@
-import { POSTER } from './scene.config'
+import { POSTER, posterSrcSet, posterUrl } from './scene.config'
 
 interface HeroPosterProps {
   /** true cuando el canvas 3D ya está listo: el póster se desvanece. */
@@ -7,14 +7,16 @@ interface HeroPosterProps {
 
 /**
  * Imagen estática visible desde el primer paint (candidato a LCP).
- * AVIF con fallback WebP. Decorativa: alt vacío.
+ * Responsive (640/1280/1920 w) en AVIF con fallback WebP. Decorativa: alt vacío.
  */
 export function HeroPoster({ faded }: HeroPosterProps) {
   return (
     <picture>
-      <source srcSet={POSTER.avif} type="image/avif" />
+      <source type="image/avif" srcSet={posterSrcSet('avif')} sizes={POSTER.sizes} />
       <img
-        src={POSTER.webp}
+        src={posterUrl(1280, 'webp')}
+        srcSet={posterSrcSet('webp')}
+        sizes={POSTER.sizes}
         alt=""
         width={POSTER.width}
         height={POSTER.height}

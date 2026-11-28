@@ -36,8 +36,12 @@ export interface SectionHeading {
 
 export interface MetaContent {
   readonly lang: string
+  /** Locale Open Graph (p. ej. es_ES). */
+  readonly locale: string
   readonly title: string
   readonly description: string
+  /** Texto alternativo de la imagen Open Graph. */
+  readonly ogImageAlt: string
 }
 
 export interface BrandContent {

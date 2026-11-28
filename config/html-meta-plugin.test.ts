@@ -11,7 +11,7 @@ describe('escapeHtml', () => {
 
 describe('htmlMeta', () => {
   it('sustituye los placeholders escapando valores', () => {
-    const plugin = htmlMeta({ lang: 'es', title: 'A & B', description: '<b>d</b>' })
+    const plugin = htmlMeta({ lang: 'es', locale: 'es_ES', title: 'A & B', description: '<b>d</b>', ogImageAlt: 'alt' })
     const transform = plugin.transformIndexHtml as (html: string) => string
     const out = transform('<html lang="%LANG%"><title>%TITLE%</title>%DESCRIPTION%')
     expect(out).toBe('<html lang="es"><title>A &amp; B</title>&lt;b&gt;d&lt;/b&gt;')

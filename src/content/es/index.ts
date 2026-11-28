@@ -14,9 +14,11 @@ import { media } from './media.ts'
 export const es: SiteContent = {
   meta: {
     lang: 'es',
+    locale: 'es_ES',
     title: '[NOMBRE] · Tecnología para pymes en Barcelona',
     description:
       'Soporte IT, ciberseguridad, cloud, desarrollo web e integración de software para pymes en Barcelona.',
+    ogImageAlt: 'Tecnología para pymes en Barcelona',
   },
   brand: {
     name: '[NOMBRE]',

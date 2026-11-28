@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { act } from '@testing-library/react'
+import { act, fireEvent } from '@testing-library/react'
 import { resetWebGLCache } from '@/lib/webgl'
 import { axe, renderWithProviders, screen, setMatchMedia } from '@/test/renderWithProviders'
 import { HeroBackdrop } from './HeroBackdrop'
@@ -32,6 +32,8 @@ const withWebGL = (available: boolean) =>
     .mockImplementation((() => (available ? {} : null)) as never)
 
 const poster = () => screen.getByRole('presentation', { hidden: true })
+/** El 3D solo se carga tras la primera interacción (scroll, toque, tecla…). */
+const interact = () => act(() => void fireEvent.scroll(window))
 
 describe('<HeroBackdrop />', () => {
   beforeEach(() => {
@@ -45,6 +47,8 @@ describe('<HeroBackdrop />', () => {
     const { container } = renderWithProviders(<HeroBackdrop />)
     expect(screen.getByTestId('hero-backdrop')).toHaveAttribute('aria-hidden', 'true')
     expect(poster()).toHaveAttribute('fetchpriority', 'high')
+    expect(poster()).toHaveAttribute('srcset', expect.stringContaining('640w'))
+    interact()
     await screen.findByTestId('hero-canvas')
     expect(await axe(container)).toHaveNoViolations()
   })
@@ -53,10 +57,18 @@ describe('<HeroBackdrop />', () => {
     withWebGL(true)
     gpu.state = { tier: 2, isMobile: true }
     renderWithProviders(<HeroBackdrop />)
+    interact()
     expect(await screen.findByTestId('hero-canvas')).toHaveAttribute('data-dpr', '1,1.5')
     expect(poster()).toHaveAttribute('data-faded', 'false')
     act(() => ready.fire())
     expect(poster()).toHaveAttribute('data-faded', 'true')
+  })
+
+  it('no carga three ni detecta la GPU antes de la primera interacción', () => {
+    withWebGL(true)
+    renderWithProviders(<HeroBackdrop />)
+    expect(gpu.enabledArg).toBe(false)
+    expect(screen.queryByTestId('hero-canvas')).not.toBeInTheDocument()
   })
 
   it.each([
@@ -66,12 +78,14 @@ describe('<HeroBackdrop />', () => {
     withWebGL(true)
     gpu.state = state
     renderWithProviders(<HeroBackdrop />)
+    interact()
     expect(screen.queryByTestId('hero-canvas')).not.toBeInTheDocument()
   })
 
   it('sin WebGL ni siquiera intenta detectar la GPU', () => {
     withWebGL(false)
     renderWithProviders(<HeroBackdrop />)
+    interact()
     expect(gpu.enabledArg).toBe(false)
     expect(screen.queryByTestId('hero-canvas')).not.toBeInTheDocument()
   })
