@@ -42,5 +42,6 @@ Ver [`docs/`](./docs): un documento por sección principal.
 9. [Secciones de la home](./docs/09-home-sections.md)
 
 13. [Vídeo del hero con scroll](./docs/13-hero-video.md)
+14. [Cortinilla de entrada](./docs/14-intro-curtain.md)
 
 Créditos de imágenes y fuentes: [docs/CREDITS.md](./docs/CREDITS.md).
