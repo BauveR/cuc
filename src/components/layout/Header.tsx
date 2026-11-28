@@ -56,7 +56,7 @@ export function Header({ content, introPending = false }: HeaderProps) {
           className="col-span-6 hidden items-center justify-between font-semibold xl:flex"
         >
           {/* 1280–1365 px: separaciones algo menores para que quepan los corazones. */}
-          <NavLinks links={layout.nav} className="gap-2.5 min-[1366px]:gap-4" />
+          <NavLinks links={layout.nav} className="gap-2 min-[1366px]:gap-4" />
           <span data-intro-target="hearts" className={cx('text-[6px]', introPending && 'invisible')}>
             <Hearts />
           </span>

@@ -55,8 +55,10 @@ logotipo ni color.
 | Corazones (≥ 1280 px) | Entre «Contacto» y los idiomas | fila de 6 px de alto (~80 px) |
 | Corazones (< 1280 px) | Vuelan al botón «Menú», se encogen y se desvanecen; viven en el menú abierto junto a los idiomas | — |
 
-- Entre 1280 y 1365 px la separación de enlaces baja de 16 a 10 px y la de
-  idiomas de 12 a 8 px: hueco de 57 px → caben los corazones (8 / 7 px de aire).
+- Entre 1280 y 1365 px la separación de enlaces baja de 16 a 8 px y la de
+  idiomas de 12 a 8 px: caben los corazones con ~9 px de aire. (Era 10 px;
+  con la Inter autoalojada del paso 11 los enlaces son algo más anchos y el
+  aire bajó a 4 px.)
 - El monograma sobresale siempre (sello fijo) con `pointer-events: none` (no
   bloquea clics). Se usa **tal cual el SVG original**: hubo un contorno papel
   de 1,5 px para fondos oscuros, pero se retiró — alteraba el diseño (se veía
