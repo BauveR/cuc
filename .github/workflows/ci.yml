@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Typecheck · Lint · Test · Build
+    name: Lint · Typecheck · Test · Build · Audit
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -33,15 +33,37 @@ jobs:
       - name: Install (lockfile estricto, sin scripts de terceros)
         run: npm ci --ignore-scripts
 
-      - run: npm run typecheck
+      - name: Política — ningún workflow usa secretos
+        run: |
+          if grep -rnE '\$\{\{\s*secrets\.' .github/workflows; then
+            echo "::error::Los workflows no deben usar secrets.*"
+            exit 1
+          fi
+
       - run: npm run lint
-      - run: npm run test
+      - run: npm run typecheck
+
+      # Con cobertura: el umbral del 80 % (vite.config.ts) también se aplica en CI.
+      - name: Tests con cobertura
+        run: npm run test:coverage
+
+      - name: Informe de cobertura
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
+          if-no-files-found: ignore
+
       - run: npm run build
       - name: Presupuesto del modelo 3D (si existe)
         run: npm run models:check
 
-      - name: Audit dependencias de runtime
+      - name: Audit dependencias de runtime (moderate+)
         run: npm audit --omit=dev --audit-level=moderate
+      - name: Audit árbol completo (high+)
+        run: npm audit --audit-level=high
 
   secrets:
     name: Secret scan (gitleaks)

@@ -49,7 +49,7 @@ Conventional Commit (`feat/hero-section`, `test/configure-vitest`).
 | pre-commit | lint-staged + ESLint | Lint de archivos modificados, 0 warnings |
 | commit-msg | commitlint | Exige Conventional Commits |
 | pre-push | husky | Bloquea push directo a `main`/`develop`; ejecuta `npm run check` |
-| PR / push | GitHub Actions `ci.yml` | typecheck, lint, test, build, `npm audit`, gitleaks CLI (historial completo) |
+| PR / push | GitHub Actions `ci.yml` | lint, typecheck, test con cobertura (80 %), build, `npm audit` ×2, gitleaks CLI, política sin secretos (ver `docs/12-ci.md`) |
 | push a `main` | `release.yml` (release-please) | PR de release con CHANGELOG + SemVer → tag |
 | Semanal | Dependabot → `develop` | Actualizaciones npm y Actions (majors de `eslint`, `@eslint/js` y `typescript` ignoradas hasta migrar) |
 
