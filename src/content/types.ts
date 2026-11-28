@@ -15,6 +15,8 @@ import type {
 } from './section-types.ts'
 
 export type * from './section-types.ts'
+export type * from './layout-types.ts'
+import type { FooterContent, LayoutContent, MediaContent } from './layout-types.ts'
 
 export const LOCALES = ['es'] as const // añadir 'ca' | 'en' cuando existan
 export type Locale = (typeof LOCALES)[number]
@@ -57,4 +59,7 @@ export interface SiteContent {
   readonly cases: WithItems<CaseStudy> & { readonly labels: CaseLabels }
   readonly cta: CtaContent
   readonly contact: ContactContent
+  readonly layout: LayoutContent
+  readonly footer: FooterContent
+  readonly media: MediaContent
 }

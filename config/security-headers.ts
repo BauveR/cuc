@@ -16,6 +16,7 @@ const csp = (dev: boolean): string =>
     "style-src 'self' 'unsafe-inline'", // estilos inline de GSAP/R3F
     "img-src 'self' data: blob:",
     "font-src 'self'",
+    "media-src 'self'", // vídeo del hero: solo desde el propio origen
     dev ? "connect-src 'self' ws: wss:" : "connect-src 'self'",
     "worker-src 'self' blob:", // loaders de three/drei
     "object-src 'none'",

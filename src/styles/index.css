@@ -7,11 +7,20 @@
     background-color: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: var(--text-body);
-    line-height: var(--text-body--line-height);
+    font-weight: 500;
+    /* La raíz NO fija font-size: 1rem = tamaño del navegador (16 px por defecto,
+       respeta la preferencia del usuario). Si fuese 15 px, todos los tokens en rem
+       (header 53 px, gutter 15 px…) encogerían un 6 %. */
+    /* Anclas: el header sticky no tapa el inicio de la sección (scroll nativo). */
+    scroll-padding-top: var(--spacing-header);
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
   }
 
   ::selection {

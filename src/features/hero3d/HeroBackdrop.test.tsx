@@ -15,6 +15,10 @@ vi.mock('./useGpuTier', () => ({
   },
 }))
 
+vi.mock('@/features/heroVideo/HeroVideo', () => ({
+  HeroVideo: () => <div data-testid="hero-video" />,
+}))
+
 vi.mock('./HeroCanvas', () => ({
   default: ({ onReady, dpr }: { onReady: () => void; dpr: readonly number[] }) => {
     ready.fire = onReady

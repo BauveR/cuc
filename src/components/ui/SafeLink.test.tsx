@@ -35,6 +35,15 @@ describe('<SafeLink />', () => {
     expect(screen.getByRole('link')).toHaveClass(...LINK_VARIANTS.primary.split(' '))
   })
 
+  it('la variante plain solo subraya en hover/foco (listas de navegación)', () => {
+    renderWithProviders(
+      <SafeLink href="#a" variant="plain">
+        Nav
+      </SafeLink>,
+    )
+    expect(screen.getByRole('link')).toHaveClass('no-underline', 'hover:underline', 'focus-visible:underline')
+  })
+
   it('no tiene violaciones de accesibilidad', async () => {
     const { container } = renderWithProviders(<SafeLink href="mailto:hola@example.com">Email</SafeLink>)
     expect(await axe(container)).toHaveNoViolations()
