@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { SECTION_IDS, anchor, type SiteContent } from '@/content/site'
+import { Wordmark } from '@/components/brand/Wordmark'
 import { LangSwitch } from './LangSwitch'
 import { MenuOverlay } from './MenuOverlay'
 import { MenuToggle } from './MenuToggle'
@@ -26,8 +27,13 @@ export function Header({ content }: HeaderProps) {
     <header className="sticky top-0 z-40 h-header bg-paper px-gutter">
       {/* Menú abierto: barra inerte (sin foco) y oculta a lectores → un solo "Cerrar". */}
       <div className="grid h-full grid-cols-12 items-center gap-gutter" inert={open} aria-hidden={open}>
-        <a href={anchor(SECTION_IDS.intro)} className="col-span-6 font-semibold">
-          {brand.name}
+        {/* Logotipo 17:1: en móvil necesita 9 columnas; desde xl, 1–6 como la referencia. */}
+        <a
+          href={anchor(SECTION_IDS.intro)}
+          aria-label={brand.name}
+          className="col-span-9 h-3 w-fit min-[360px]:h-3.5 md:h-4 xl:col-span-6"
+        >
+          <Wordmark />
         </a>
         <nav
           aria-label={layout.navLabel}
@@ -36,7 +42,7 @@ export function Header({ content }: HeaderProps) {
           <NavLinks links={layout.nav} className="gap-4" />
           <LangSwitch languages={layout.languages} current={meta.lang} />
         </nav>
-        <div className="col-span-6 flex justify-end xl:hidden">
+        <div className="col-span-3 flex justify-end xl:hidden">
           <MenuToggle open={open} onToggle={() => setOpen((o) => !o)} controls={MENU_ID} labels={layout.menu} />
         </div>
       </div>
