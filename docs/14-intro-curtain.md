@@ -58,8 +58,10 @@ logotipo ni color.
 - Entre 1280 y 1365 px la separación de enlaces baja de 16 a 10 px y la de
   idiomas de 12 a 8 px: hueco de 57 px → caben los corazones (8 / 7 px de aire).
 - El monograma sobresale siempre (sello fijo) con `pointer-events: none` (no
-  bloquea clics) y **contorno papel** de 1,5 px (`paint-order: stroke`):
-  invisible sobre papel, lo recorta sobre fondos oscuros.
+  bloquea clics). Se usa **tal cual el SVG original**: hubo un contorno papel
+  de 1,5 px para fondos oscuros, pero se retiró — alteraba el diseño (se veía
+  al cruzar el vídeo) y ningún fondo oscuro llega a pasar por debajo (contacto
+  queda a ≥ 207 px del borde; el monograma acaba a 115 px).
 
 **Técnica: FLIP con dos copias** (`flight.ts`)
 
