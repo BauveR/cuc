@@ -34,6 +34,20 @@ Se mantienen Lenis + GSAP (smooth scroll, RevealText, ScrollTriggers) y el hero 
 
 Hooks: `useFocusTrap`, `useScrollLock`, `useAnchorNavigation`.
 
+## Logotipo en el header
+
+- `src/components/brand/Wordmark.tsx`: logotipo «CUC» en línea, `currentColor`,
+  `aria-hidden`; el nombre accesible lo da el enlace (`aria-label = brand.name`).
+- Original en `src/components/brand/source/cuccuc-05.svg` (fuera de `public/`).
+- **Optimización verificada píxel a píxel:** el SVG repite sus 3 «CUC» desplazados
+  234 unidades → se guarda solo la mitad y se repite con `translate`
+  (10,8 KB → 5,4 KB de geometría). Se descartó:
+  - unir los trazos en un `<path>`: abre huecos donde las piezas se solapan (nonzero);
+  - redondear a 2 decimales: con coordenadas relativas el error se acumula.
+- Proporción 17:1 → alto 12 px (< 360 px), 14 px (móvil), 16 px (≥ md).
+  En móvil ocupa 9 columnas (Menú en 3); desde `xl`, columnas 1–6.
+  Medido de 320 a 1920 px: sin desbordes, centrado vertical en el header.
+
 ## Accesibilidad del menú
 
 - Diálogo `role="dialog"` + `aria-modal`, con nombre.
