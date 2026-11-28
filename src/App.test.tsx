@@ -29,10 +29,11 @@ describe('<App />', () => {
     expect(screen.getByRole('main').closest('[inert]')).toBeNull()
   })
 
-  it('con intro muestra la cortinilla y deja la página inerte bajo ella', () => {
+  it('con intro muestra la cortinilla sin sacar la página del árbol accesible', () => {
     renderWithProviders(<App onIntroLift={vi.fn()} />)
-    expect(screen.getByTestId('intro-curtain')).toBeInTheDocument()
-    expect(screen.getByTestId('hero-backdrop').closest('[inert]')).not.toBeNull()
+    expect(screen.getByTestId('intro-curtain')).toHaveAttribute('aria-hidden', 'true')
+    expect(screen.getByRole('main')).toBeInTheDocument() // landmark disponible durante la intro
+    expect(screen.getByRole('main').closest('[inert]')).toBeNull()
   })
 
   it('no tiene violaciones de accesibilidad detectables', async () => {

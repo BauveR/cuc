@@ -24,16 +24,18 @@ export function App({ onIntroLift }: AppProps) {
   return (
     <>
       {introActive && onIntroLift && <IntroCurtain onLift={onIntroLift} onDone={endIntro} />}
-      {/* Durante la intro, la página no recibe foco ni clics (sigue tapada). */}
-      <div inert={introActive}>
-        <SkipLink label={content.layout.skipLink} />
-        <Header content={content} />
-        <HeroBackdrop />
-        <main id={SECTION_IDS.main} ref={mainRef} tabIndex={-1} className="outline-none">
-          <Home content={content} />
-        </main>
-        <Footer content={content} />
-      </div>
+      {/*
+        Sin inert durante la intro: la cortinilla es decorativa (aria-hidden) y la
+        página debe estar disponible para lectores de pantalla desde el inicio.
+        Los clics los bloquea el propio panel mientras cubre la pantalla.
+      */}
+      <SkipLink label={content.layout.skipLink} />
+      <Header content={content} introPending={introActive} />
+      <HeroBackdrop />
+      <main id={SECTION_IDS.main} ref={mainRef} tabIndex={-1} className="outline-none">
+        <Home content={content} />
+      </main>
+      <Footer content={content} />
     </>
   )
 }

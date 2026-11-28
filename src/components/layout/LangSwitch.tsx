@@ -5,6 +5,7 @@ interface LangSwitchProps {
   readonly languages: LayoutContent['languages']
   /** Idioma actual de la página. */
   readonly current: string
+  /** Sustituye la separación por defecto (gap-3) si se pasa. */
   readonly className?: string
 }
 
@@ -15,7 +16,7 @@ interface LangSwitchProps {
  */
 export function LangSwitch({ languages, current, className }: LangSwitchProps) {
   return (
-    <ul aria-label={languages.label} className={cx('flex gap-3', className)}>
+    <ul aria-label={languages.label} className={cx('flex', className ?? 'gap-3')}>
       {languages.options.map((option) => {
         const isCurrent = option.code === current
         return (

@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Hearts } from '@/components/brand/Hearts'
 import type { LayoutContent } from '@/content/site'
 import { useAnchorNavigation } from '@/hooks/useAnchorNavigation'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -52,11 +53,15 @@ export function MenuOverlay({ id, layout, brand, lang, onClose }: MenuOverlayPro
           linkClassName="text-headline font-semibold"
         />
       </nav>
-      <LangSwitch
-        languages={layout.languages}
-        current={lang}
-        className="py-gutter [&_.text-ink-muted]:text-on-inverse-muted"
-      />
+      {/* Los corazones que "entraron" en el botón Menú durante la intro viven aquí. */}
+      <div className="flex items-center justify-between py-gutter">
+        <LangSwitch
+          languages={layout.languages}
+          current={lang}
+          className="gap-3 [&_.text-ink-muted]:text-on-inverse-muted"
+        />
+        <Hearts className="text-[8px]" />
+      </div>
     </div>
   )
 }
