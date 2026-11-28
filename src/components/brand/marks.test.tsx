@@ -2,20 +2,16 @@ import { describe, expect, it } from 'vitest'
 import { axe, renderWithProviders } from '@/test/renderWithProviders'
 import { Hearts } from './Hearts'
 import { Monogram } from './Monogram'
-import { HEART_COUNT } from './marks.paths'
+import { HEART_COUNT, MONOGRAM } from './marks.paths'
 
 describe('<Monogram />', () => {
-  it('decorativo, en currentColor y sin contorno por defecto', () => {
+  it('decorativo, en currentColor y con el trazo exacto del original (sin contorno)', () => {
     const { container } = renderWithProviders(<Monogram />)
     expect(container.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')
-    expect(container.querySelector('path')).not.toHaveAttribute('stroke')
-  })
-
-  it('outlined: contorno papel por fuera del trazo (legible sobre fondos oscuros)', () => {
-    const { container } = renderWithProviders(<Monogram outlined />)
+    expect(container.querySelector('svg')).toHaveAttribute('fill', 'currentColor')
     const path = container.querySelector('path')
-    expect(path).toHaveAttribute('stroke', 'var(--color-paper)')
-    expect(path).toHaveAttribute('paint-order', 'stroke')
+    expect(path).toHaveAttribute('d', MONOGRAM.path)
+    expect(path).not.toHaveAttribute('stroke')
   })
 })
 

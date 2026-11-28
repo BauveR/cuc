@@ -34,7 +34,7 @@ export function IntroCurtain({ onLift, onDone }: IntroCurtainProps) {
       <div className="pointer-events-none fixed inset-0 z-[101] flex items-center justify-center text-ink">
         <div className="relative">
           <div ref={logoBox} className="h-[clamp(5rem,14svh,9rem)] overflow-hidden">
-            <Monogram ref={logo} outlined className="h-full" />
+            <Monogram ref={logo} className="h-full" />
           </div>
           <div className="absolute top-full left-1/2 mt-[clamp(1rem,3svh,1.75rem)] -translate-x-1/2 text-[clamp(0.875rem,2svh,1.25rem)]">
             <Hearts ref={hearts} />

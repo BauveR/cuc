@@ -47,7 +47,7 @@ export function Header({ content, introPending = false }: HeaderProps) {
             data-intro-target="monogram"
             className={cx('pointer-events-none h-14 shrink-0 min-[360px]:h-18 md:h-24', introPending && 'invisible')}
           >
-            <Monogram outlined className="h-full" />
+            <Monogram className="h-full" />
           </span>
           <Wordmark />
         </a>
