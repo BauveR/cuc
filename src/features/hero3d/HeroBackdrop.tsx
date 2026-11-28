@@ -1,4 +1,5 @@
 import { Suspense, lazy, useCallback, useState } from 'react'
+import { HeroVideo } from '@/features/heroVideo/HeroVideo'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { supportsWebGL } from '@/lib/webgl'
 import { HeroPoster } from './HeroPoster'
@@ -10,6 +11,7 @@ const HeroCanvas = lazy(() => import('./HeroCanvas'))
 
 /**
  * Fondo fijo del hero, detrás del contenido y a 100lvh.
+ * Capas (de atrás adelante): póster → vídeo con scrub → canvas 3D.
  * Solo póster si: reduced-motion, sin WebGL, detectando GPU o GPU tier 0.
  */
 export function HeroBackdrop() {
@@ -27,6 +29,7 @@ export function HeroBackdrop() {
       className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh overflow-hidden"
     >
       <HeroPoster faded={dpr !== null && ready} />
+      <HeroVideo />
       {dpr && (
         <Suspense fallback={null}>
           <HeroCanvas onReady={onReady} dpr={dpr} />

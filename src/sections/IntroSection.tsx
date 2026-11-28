@@ -10,9 +10,9 @@ interface IntroSectionProps {
 }
 
 /**
- * Claim principal (único h1). Fondo transparente: deja ver el hero 3D.
- * En móvil el modelo queda centrado detrás del texto: velo de papel para
- * garantizar contraste AA; en escritorio el modelo vive a la derecha.
+ * Claim principal (único h1). Fondo transparente: deja ver el vídeo y el 3D.
+ * El texto va superpuesto al vídeo: velo de papel translúcido en todos los
+ * tamaños para garantizar contraste AA sea cual sea el fotograma.
  */
 export function IntroSection({ content }: IntroSectionProps) {
   return (
@@ -20,9 +20,11 @@ export function IntroSection({ content }: IntroSectionProps) {
       id={SECTION_IDS.intro}
       labelledBy={TITLE_ID}
       tone="transparent"
-      className="flex min-h-lvh flex-col justify-end"
+      // El texto se apoya dentro del recuadro del vídeo (80svh bajo el header):
+      // margen inferior = lo que sobra de la sección + un gutter.
+      className="flex min-h-lvh flex-col justify-end pb-[calc(100lvh-80svh+var(--spacing-gutter))]!"
     >
-      <div className="flex flex-col gap-stack rounded-2xl max-md:bg-paper/85 max-md:p-6 max-md:backdrop-blur-sm md:max-w-[65%]">
+      <div className="mx-gutter flex flex-col gap-stack bg-paper/85 p-6 backdrop-blur-sm md:max-w-[65%] lg:max-w-[50%]">
         <Heading id={TITLE_ID} level={1} eyebrow={content.eyebrow} title={content.title} intro={content.lead} />
         <div className="flex flex-wrap gap-4">
           <SafeLink href={content.primaryCta.href} variant="primary">

@@ -21,6 +21,11 @@ igualmente por buena práctica y trazabilidad.
 - **Metadatos eliminados** (EXIF/XMP: cámara, GPS…) en la conversión.
 - Los JPEG originales no se versionan.
 
+## Vídeo
+
+- `public/video/hero-*`: grabación propia del responsable del proyecto,
+  recodificada sin audio ni metadatos (ver `docs/13-hero-video.md`).
+
 ## Otros recursos
 
 - Tipografía Inter (Rasmus Andersson), licencia SIL Open Font License 1.1,

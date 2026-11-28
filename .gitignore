@@ -22,3 +22,9 @@ coverage
 !.vscode/extensions.json
 .idea
 *.log
+
+# originales de vídeo/imagen (pesados y con metadatos: GPS, fecha, dispositivo).
+# Fuera de public/ para que nunca entren en el build. Solo se versionan las
+# versiones optimizadas y sin metadatos de public/video/ (ver docs/13-hero-video.md).
+media-src/
+*.mov
