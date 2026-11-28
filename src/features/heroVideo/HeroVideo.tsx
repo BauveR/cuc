@@ -21,20 +21,24 @@ const prime = ({ currentTarget: video }: SyntheticEvent<HTMLVideoElement>): void
 
 /**
  * Vídeo del hero que avanza al ritmo del scroll, en un recuadro del 80 %
- * de alto bajo el header y entre los márgenes de la rejilla.
+ * de alto apoyado abajo: el margen inferior es el mismo gutter que los
+ * laterales (15 px) y el espacio libre queda arriba, bajo el header.
+ * Se mide con svh (viewport visible): en móvil la barra del navegador no lo tapa.
  * Vive en el fondo fijo (detrás del 3D); las secciones opacas lo tapan al subir.
  * - Primer paint: fotograma estático (AVIF/WebP) del encuadre que toca.
  * - El <video> se monta tras el load (no compite con el LCP) y nunca con
  *   reduced-motion o ahorro de datos: entonces se queda el fotograma.
- * - Encuadre vertical u horizontal según la forma del recuadro (y al rotar).
+ * - Encuadre vertical u horizontal según la forma del recuadro (y al rotar);
+ *   en horizontal, resolución nativa solo en pantallas grandes o Retina.
  */
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [loadedSrc, setLoadedSrc] = useState<string | null>(null)
   const portrait = useMediaQuery(HERO_VIDEO.portraitQuery)
+  const hd = useMediaQuery(HERO_VIDEO.hdQuery)
   const reducedMotion = usePrefersReducedMotion()
   const afterLoad = useAfterLoad()
-  const media = portrait ? HERO_VIDEO.portrait : HERO_VIDEO.landscape
+  const media = portrait ? HERO_VIDEO.portrait : hd ? HERO_VIDEO.landscapeHd : HERO_VIDEO.landscape
   const withVideo = afterLoad && !reducedMotion && !prefersSaveData()
   const loaded = loadedSrc === media.src // al rotar cambia el src: vuelve a cargar
   useVideoScrub(videoRef, SECTION_IDS.intro, withVideo && loaded)
@@ -42,7 +46,7 @@ export function HeroVideo() {
   return (
     <div
       data-testid="hero-video"
-      className="absolute inset-x-gutter top-header h-[80svh] overflow-hidden bg-surface"
+      className="absolute inset-x-gutter top-[calc(20svh-var(--spacing-gutter))] h-[80svh] overflow-hidden bg-surface"
     >
       <picture>
         <source type="image/avif" srcSet={media.poster.avif} />

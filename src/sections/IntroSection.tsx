@@ -20,9 +20,11 @@ export function IntroSection({ content }: IntroSectionProps) {
       id={SECTION_IDS.intro}
       labelledBy={TITLE_ID}
       tone="transparent"
-      // El texto se apoya dentro del recuadro del vídeo (80svh bajo el header):
-      // margen inferior = lo que sobra de la sección + un gutter.
-      className="flex min-h-lvh flex-col justify-end pb-[calc(100lvh-80svh+var(--spacing-gutter))]!"
+      // El texto se apoya dentro del recuadro del vídeo, que acaba a un gutter
+      // del borde inferior del viewport visible (100svh − gutter). La sección
+      // empieza bajo el header y mide 100lvh → sobran lvh − svh + header + gutter,
+      // y otro gutter de aire dentro del vídeo.
+      className="flex min-h-lvh flex-col justify-end pb-[calc(100lvh-100svh+var(--spacing-header)+2*var(--spacing-gutter))]!"
     >
       <div className="mx-gutter flex flex-col gap-stack bg-paper/85 p-6 backdrop-blur-sm md:max-w-[65%] lg:max-w-[50%]">
         <Heading id={TITLE_ID} level={1} eyebrow={content.eyebrow} title={content.title} intro={content.lead} />

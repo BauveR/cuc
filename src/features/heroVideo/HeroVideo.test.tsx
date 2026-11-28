@@ -38,6 +38,14 @@ describe('<HeroVideo />', () => {
     expect(frame()).toHaveAttribute('src', HERO_VIDEO.portrait.poster.webp)
   })
 
+  it('en pantallas grandes o Retina sirve la versión HD; el vertical manda sobre ella', () => {
+    renderWithProviders(<HeroVideo />)
+    act(() => setMatchMedia((q) => q === HERO_VIDEO.hdQuery))
+    expect(video()).toHaveAttribute('src', HERO_VIDEO.landscapeHd.src)
+    act(() => setMatchMedia((q) => q === HERO_VIDEO.hdQuery || q === HERO_VIDEO.portraitQuery))
+    expect(video()).toHaveAttribute('src', HERO_VIDEO.portrait.src)
+  })
+
   it('aparece al cargar datos y se "despierta" (play+pause) para iOS', async () => {
     renderWithProviders(<HeroVideo />)
     const v = video()
@@ -62,9 +70,9 @@ describe('<HeroVideo />', () => {
 })
 
 describe('ficheros del vídeo', () => {
-  it.each(['landscape', 'portrait'] as const)('"%s": mp4 dentro de presupuesto y fotogramas', (name) => {
+  it.each(['landscapeHd', 'landscape', 'portrait'] as const)('"%s": mp4 dentro de presupuesto y fotogramas', (name) => {
     const r = HERO_VIDEO[name]
     for (const path of [r.src, r.poster.avif, r.poster.webp]) expect(existsSync(`public${path}`), path).toBe(true)
-    expect(statSync(`public${r.src}`).size).toBeLessThanOrEqual(HERO_VIDEO.maxBytes)
+    expect(statSync(`public${r.src}`).size).toBeLessThanOrEqual(r.maxBytes)
   })
 })

@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # Genera los encuadres del vídeo del hero a partir del original (no versionado).
 #   Uso: scripts/encode-hero-video.sh [media-src/hero.mov] [foco_x 0..1 = 0.5]
-# Requiere ffmpeg, avifenc y cwebp. Salida: public/video/hero-{landscape,portrait}.{mp4,avif,webp}
+# Requiere ffmpeg, avifenc y cwebp. Salida: public/video/hero-{landscape-hd,landscape,portrait}.{mp4,avif,webp}
 #
 # Decisiones (ver docs/13-hero-video.md):
 # - H.264 High + yuv420p: decodificación por hardware en todos los navegadores.
 # - 24 fps y keyframe cada 12 frames (0,5 s, sin cortes por escena): seek rápido
 #   al hacer scrub sin disparar el peso (GOP 6 a 30 fps: 8,5 MB; ver docs).
 # - CRF por encuadre para caber en el presupuesto (oleaje = textura difícil).
+# - AV1 descartado: con GOP de 0,5 s pierde su ventaja frente a H.264 (ver docs).
 # - Rango limitado (tv): el iPhone graba yuvj (full) y algunos navegadores lo lavan.
 # - Sin audio y SIN METADATOS (-map_metadata -1, bitexact): el original lleva GPS y fecha.
 # - faststart: el índice va al principio → el navegador puede pedir rangos ya.
@@ -36,9 +37,11 @@ encode() { # $1 nombre, $2 filtro de vídeo, $3 CRF
   cwebp -quiet -metadata none -q 72 "$TMP/$1.png" -o "$OUT/hero-$1.webp"
 }
 
+# Horizontal HD: resolución nativa (1920×1080), solo escritorio grande/Retina (≤ 6 MB).
+encode landscape-hd "null" 28
 # Horizontal: proporción original, 1280 px de ancho.
-encode landscape "scale=1280:-2:flags=lanczos" 36
+encode landscape "scale=1280:-2:flags=lanczos" 28
 # Vertical 3:4 a altura completa, centrado en FOCUS_X.
-encode portrait "crop=trunc(ih*3/8)*2:trunc(ih/2)*2:(iw-trunc(ih*3/8)*2)*${FOCUS_X}:0" 34
+encode portrait "crop=trunc(ih*3/8)*2:trunc(ih/2)*2:(iw-trunc(ih*3/8)*2)*${FOCUS_X}:0" 26
 
 ls -l "$OUT"

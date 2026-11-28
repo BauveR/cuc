@@ -13,7 +13,8 @@ interface HeaderProps {
 
 /**
  * Header sticky de 53 px sobre la rejilla de 12 columnas (como la referencia):
- * marca en las columnas 1–6; navegación e idiomas desde la 7 (≥ lg).
+ * marca en las columnas 1–6; navegación e idiomas desde la 7 (≥ xl: por
+ * debajo de 1280 px los 6 enlaces + idiomas no caben en 6 columnas).
  * En móvil/tablet, botón "Menú" que abre el overlay a pantalla completa.
  */
 export function Header({ content }: HeaderProps) {
@@ -30,12 +31,12 @@ export function Header({ content }: HeaderProps) {
         </a>
         <nav
           aria-label={layout.navLabel}
-          className="col-span-6 hidden items-center justify-between font-semibold lg:flex"
+          className="col-span-6 hidden items-center justify-between font-semibold xl:flex"
         >
           <NavLinks links={layout.nav} className="gap-4" />
           <LangSwitch languages={layout.languages} current={meta.lang} />
         </nav>
-        <div className="col-span-6 flex justify-end lg:hidden">
+        <div className="col-span-6 flex justify-end xl:hidden">
           <MenuToggle open={open} onToggle={() => setOpen((o) => !o)} controls={MENU_ID} labels={layout.menu} />
         </div>
       </div>

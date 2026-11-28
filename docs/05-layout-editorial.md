@@ -25,7 +25,7 @@ Se mantienen Lenis + GSAP (smooth scroll, RevealText, ScrollTriggers) y el hero 
 | Componente | Responsabilidad |
 | ---------- | --------------- |
 | `SkipLink` | Primer foco; salta a `#contenido` (WCAG 2.4.1) |
-| `Header` | Banner sticky; nav inline ≥ lg, botón Menú en móvil/tablet |
+| `Header` | Banner sticky; nav inline ≥ xl (1280 px), botón Menú por debajo |
 | `NavLinks` | Lista de enlaces compartida por header y menú (DRY) |
 | `MenuToggle` | "Menú / Cerrar" con `aria-expanded` y `aria-controls` |
 | `MenuOverlay` | Diálogo modal a pantalla completa |
@@ -75,6 +75,11 @@ columnas ocupadas, `loading="lazy"` (el LCP sigue siendo el póster),
 - Móvil 390 px (emulación real, DPR 2): sin scroll horizontal (`scrollWidth = 390`),
   header con Menú, menú abierto con foco en "Cerrar", footer en 2 columnas.
 - Escritorio 1440 px: nav desde col. 7, bloques 6 + 6 y fila 8 + 4.
+- Corregido en el paso 13: entre 1024 y 1199 px la nav inline desbordaba
+  (idiomas hasta +49 px) → nav inline desde `xl`; por debajo, botón Menú.
+- Corregido en el paso 13: `html { font-size: 15px }` encogía todos los `rem`
+  un 6 % (header 50 px en vez de 53, gutter 14 en vez de 15). El tamaño de
+  texto pasa a `body`; la raíz queda en el valor del navegador.
 - Corregido: el contenedor de `Section` (`mx-auto` en flex columna) se
   encogía y centraba el intro → `w-full`.
 
